@@ -1,5 +1,4 @@
-<style>
-    body {
+ body {
         font-family: Arial, sans-serif;
         padding: 20px;
         max-width: 800px;
@@ -70,4 +69,3 @@
     .filme-item .btn-remover:hover {
         background-color: #c82333;
     }
-</style>
