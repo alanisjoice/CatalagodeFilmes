@@ -112,5 +112,37 @@ removerBotao.addEventListener('click', () => {
 removerFilme(indice, filmeDiv);
 });
 
-// C. ANEXAR ELEMENTOS (appendChild)
-// Monta a estrutura hierarquica:
+  // C. ANEXAR ELEMENTOS (appendChild)
+     // Monta a estrutura hierárquica:
+     // Monta a estrutura hierárquica:
+     // filmeDiv
+     |- titulaH3
+     - sinopsep
+     - removerBotao
+     filmeDiv.appendChild(tituloH3);
+     filmeDiv.appendChild(sinopseP);
+     filmeDiv.appendChild(removerBotao);
+     
+     // D. INSERÇÃO NO DOM FINAL
+     // Adiciona o filme montado (filmeDiv) dentro do container principal na página.
+    listaFilmes Container.appendChild(filmeDiv);
+}
+     //
+     // FUNÇÃO PRINCIPAL DE ADIÇÃO (Manipulador do Formulario)
+     Lida com o envio do formulario, captura os dados e salva o filme.
+     * @param (Event) evento O evento de 'submit' do formulario.
+     */
+     function adicionarFilme (evento) {
+     // 3. Previne o recarregamento da página
+     // O comportamento padrão de um formulario recarregar a página. O preventDefault() impede isso.
+     evento.preventDefault();
+
+    // 4. Captura os valores dos campos
+    const tituloInput = document.getElementById('titulo');
+    const sinopseInput document.getElementById('sinopse');
+
+    // Cria o objeto JavaScript com os dados
+    const novoFilme = {
+         titulo: tituloInput.value,
+         sinopse: sinopseInput.value
+    };
