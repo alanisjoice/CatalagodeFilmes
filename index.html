@@ -71,7 +71,7 @@
         
         console.log('Filme no índice ${indice} removido. Catálogo atualizado:', catalogo);
       }    
-      //-------------------------------------------------------------------------------------
+     //-------------------------------------------------------------------------------------
    //FUNÇÃO RENDERIZAÇÃO
    //-------------------------------------------------------------------------------------
    /** 
@@ -95,8 +95,22 @@ function renderizarFilme (filme, indice) {
      const tituloH3 = document.createElement("3");
      tituloH3.textContent filme.titulo;
 
+
      // Cria o <p> para a sinopse e define seu texto.
      const sinopsep = document.createElement('p');
      sinopsep.textContent = filme.sinopse;
 
-     // Cria o botão de remoção.ok
+     // Cria o botão de remoção.
+     const removerBotao = document.createElement('button');
+removerBotao.textContent = 'Remover';
+removerBotao.classList.add('btn-remover');
+
+// B. DEFINIÇÃO DO EVENTO DE REMOÇÃO (addEventListener)
+// Anexa a função 'removerFilme ao clique do botão.
+removerBotao.addEventListener('click', () => {
+   // Ao clicar, chamamos a função, passando o indice (posição) e a propria <div> (filmeDiv).
+removerFilme(indice, filmeDiv);
+});
+
+// C. ANEXAR ELEMENTOS (appendChild)
+// Monta a estrutura hierarquica:
