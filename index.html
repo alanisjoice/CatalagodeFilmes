@@ -60,22 +60,13 @@
    //-------------------------------------------------------------------------------------
    //FUNÇÃO RENDERIZAÇÃO
    //-------------------------------------------------------------------------------------
-   /** * Cria e exibe a estrutura HTML de um filme na lista.
-    * @param {Object} filme O objeto (titulo, sinopse) do filme...
-    * @param {number} indice Indice atual do filme no array catalogo.
-    */
 function renderizarFilme (filme, indice) {
-      // Remove a mensagem Inicial se for o primeiro filme
    if (catalogo.length === 1) {
        listaFilmesContainer.innerHTML = '';
 }
 
-     // A. CRIAÇÃO DE ELEMENTOS HTML (document.createElement)
-
-     // Cria a (div) que sera o continer de cada filme.
      const filmeDiv = document.createElement('div');
-     // Correção 1: 'FilmeDiv' -> 'filmeDiv' (convenção de variáveis)
-     filmeDiv.classList.add('filme-item'); // Adiciona uma classe para estilização
+     filmeDiv.classList.add('filme-item'); 
 
      // Cria o <h3> para o titulo e define seu texto.
      // CORREÇÃO 2: Tag "3" -> "h3"
