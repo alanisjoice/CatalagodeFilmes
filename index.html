@@ -1,130 +1,257 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css"
 </head>
 <body>
 
-  <h1></h1>
 
-  <form id="cadastro-filme">
-    <h2>Aidicionar Novo Filme (Busca por API)</h2>
-    <div>
-      <label for="titulo">Título do Filme:</label>
-      <input type="text" id="titulo" required>
-    </div>
-    <button type="submit">Buscar e Adicionar Filme</button>
-  </form>
+<h1></h1>
 
-  <hr>
 
-  <h2>Minha Lista de Filmes</h2>
+<form id="cadastro-filme">
+<h2>Aidicionar Novo Filme (Busca por API)</h2>
+<div>
+<label for="titulo">Título do Filme:</label>
+<input type="text" id="titulo" required>
+</div>
 
-  <div id="lista-filmes">
-    <p>Nenhum filme cadastrado ainda.</p>
-  </div>
 
-  <script>
-    const API_KEY = '6bc08ded'; // Corrigido: Removido o espaço extra
+<button type="submit">Buscar e Adicionar Filme</button>
 
-    const catalogo = [];
+</form>
 
-    const form = document.getElementById('cadastro-filme');
-    const tituloInput = document.getElementById('titulo');
-    const listaFilmesContainer = document.getElementById('lista-filmes');
 
-    function removerFilme(indice, elementoDOM) {
-      catalogo.splice(indice, 1);
-      elementoDOM.remove();
+<hr>
 
-      if (catalogo.length === 0) {
-        listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>';
-      }
-    }
 
-    function renderizarFilme(filme, indice) {
-      if (catalogo.length === 1) {
-        listaFilmesContainer.innerHTML = '';
-      }
+<h2>Minha Lista de Filmes</h2>
 
-      const filmeDiv = document.createElement('div');
-      filmeDiv.classList.add('filme-item');
 
-      const imagemPoster = document.createElement('img');
-      imagemPoster.src = filme.poster && filme.poster !== ''
-        ? filme.poster
-        : 'https://via.placeholder.com/100x150?text=Poster+Nao+Disponivel';
-      imagemPoster.alt = `Pôster do filme ${filme.titulo}`;
-      imagemPoster.classList.add('filme-poster');
+<div id="lista-filmes">
 
-      const infoDiv = document.createElement('div');
-      infoDiv.classList.add('filme-info');
+<p>Nenhum filme cadastrado ainda.</p>
 
-      const tituloH3 = document.createElement('h3');
-      tituloH3.textContent = filme.titulo;
+</div>
 
-      const sinopseP = document.createElement('p');
-      sinopseP.textContent = filme.sinopse;
 
-      const removerBotao = document.createElement('button');
-      removerBotao.textContent = 'Remover';
-      removerBotao.classList.add('btn-remover');
+<script>
 
-      removerBotao.addEventListener('click', () => {
-        const indiceAtual = catalogo.findIndex(f => f.titulo === filme.titulo);
-        if (indiceAtual > -1) {
-          removerFilme(indiceAtual, filmeDiv);
-        }
-      });
+// A CHAVE SECRETA DA API OMDb (Substitua esta string pela sua chave real!)
 
-      infoDiv.appendChild(tituloH3);
-      infoDiv.appendChild(sinopseP);
-      infoDiv.appendChild(removerBotao);
+const API_KEY = ' 6bc08ded';
 
-      filmeDiv.appendChild(imagemPoster);
-      filmeDiv.appendChild(infoDiv);
 
-      listaFilmesContainer.appendChild(filmeDiv);
-    }
+// 1. ARMAZENAMENTO DE DADOS
 
-    async function adicionarFilme(evento) {
-      evento.preventDefault();
+const catalogo = [];
 
-      const titulo = tituloInput.value.trim();
-      if (!titulo) return;
 
-      const tituloFormatado = encodeURIComponent(titulo);
-      const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${tituloFormatado}`; // Corrigido o domínio para omdbapi.com
+/// 2. CAPTURA DE ELEMENTOS DO DOM (Document Object Model)
 
-      try {
-        const resposta = await fetch(url);
-        const dadosDoFilme = await resposta.json();
+const form = document.getElementById('cadastro-filme');
 
-        if (dadosDoFilme.Response === "True") {
-          const novoFilme = {
-            titulo: dadosDoFilme.Title,
-            sinopse: dadosDoFilme.Plot,
-            poster: dadosDoFilme.Poster,
-          };
+const tituloInput = document.getElementById('titulo');
 
-          catalogo.push(novoFilme);
-          renderizarFilme(novoFilme, catalogo.length - 1);
-        } else {
-          alert(`Filme não encontrado na OMDb: "${titulo}".`);
-        }
-      } catch (error) {
-        alert('Ocorreu um erro ao tentar buscar o filme na API. Verifique sua chave.');
-        console.error('Erro de Fetch:', error);
-      }
+const listaFilmesContainer = document.getElementById('lista-filmes');
 
-      form.reset();
-    }
 
-    // CORREÇÃO: Adiciona o listener chamando a função correta
-    form.addEventListener("submit", adicionarFilme);
-  </script>
+// --------------------------------------------------------------------
+
+// FUNÇÃO DE REMOÇÃO (Mantida da Fase 1)
+
+// --------------------------------------------------------------------
+
+
+function removerFilme(indice, elementoDOM) {
+
+catalogo.splice(indice, 1);
+
+elementoDOM.remove();
+
+
+if (catalogo.length === 0) {
+
+listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>'
+
+}
+
+}
+
+
+
+// --------------------------------------------------------------------
+
+// FUNÇÃO DE RENDERIZAÇÃO (Adaptada para incluir o Pôster)
+
+// --------------------------------------------------------------------
+
+
+function renderizarFilme(filme, indice) {
+
+if (catalogo.length === 1) {
+
+listaFilmesContainer.innerHTML = '';
+
+}
+
+
+const filmeDiv = document.createElement('div');
+
+filmeDiv.classList.add('filme-item');
+
+
+// A. Elemento Imagem (Pôster)
+
+const imagemPoster = document.createElement('img');
+
+imagemPoster.src = filme.poster && filme.poster != ''
+
+? filme.poster
+
+: 'https://via.placeholder.com/100x150?text=Poster+Nao+Disponivel';
+
+imagemPoster.alt = `Pôster do filme ${filme.titulo}`;
+
+imagemPoster.classList.add('filme-poster');
+
+
+// B. Elementos de Texto e Info
+
+const infoDiv = document.createElement('div');
+
+infoDiv.classList.add('filme-info');
+
+
+const tituloH3 = document.createElement('h3');
+
+tituloH3.textContent = filme.titulo;
+
+
+const sinopseP = document.createElement('p');
+
+sinopseP.textContent = filme.sinopse;
+
+
+const removerBotao = document.createElement('button');
+
+removerBotao.textContent = 'Remover';
+
+removerBotao.classList.add('btn-remover');
+
+
+// C. Evento de Remoção
+
+removerBotao.addEventListener('click', () => {
+
+const indiceAtual = catalogo.findIndex(f => f.titulo === filme.titulo);
+
+if (indiceAtual > -1) {
+
+removerFilme(indiceAtual, filmeDiv);
+
+}
+
+});
+
+
+// D. Montagem do DOM
+
+infoDiv.appendChild(tituloH3);
+
+infoDiv.appendChild(sinopseP);
+
+infoDiv.appendChild(removerBotao);
+
+
+filmeDiv.appendChild(imagemPoster);
+
+filmeDiv.appendChild(infoDiv);
+
+
+listaFilmesContainer.appendChild(filmeDiv);
+
+}
+
+
+// --------------------------------------------------------------------
+
+// FUNÇÃO PRINCIPAL DE ADIÇÃO (Assíncrona para a API)
+
+// --------------------------------------------------------------------
+
+
+async function adicionarFilme(evento) {
+
+evento.preventDefault();
+
+
+const titulo = tituloInput.value.trim();
+
+if (!titulo) return;
+
+
+const tituloFormatado = encodeURIComponent(titulo);
+
+const url = `https://www.ombapi.com/?apikey=${API_KEY}&t=${tituloFormatado}`;
+
+
+try {
+
+const resposta = await fetch(url);
+
+const dadosDoFilme = await resposta.json();
+
+
+if (dadosDoFilme.Response === "True") {
+
+const novoFilme = {
+
+titulo: dadosDoFilme.Title,
+
+sinopse: dadosDoFilme.Plot,
+
+poster: dadosDoFilme.Poster,
+
+};
+
+
+catalogo.push(novoFilme);
+
+renderizarFilme(novoFilme, catalogo.length - 1);
+
+} else {
+
+alert(`Filme não encontrado na OMDb: "${titulo}".`);
+
+}
+
+} catch (error) {
+
+alert('Ocorreu um erro ao tentar buscar o filme na API. Verifique sua chave.');
+
+console.error('Erro de Fetch:', error);
+
+}
+
+
+form.reset();
+
+}
+
+
+// 6. ESCUTANDO O EVENTO DO FORMULÁRIO
+
+form.addEventListener("submit", () => {
+
+
+})
+
+</script>
+
 </body>
+
 </html>
