@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Filmes Fase 2: Consumo de API</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="v2.0/style.css">
 </head>
 <body>
     <h1>Catálogo de Filmes</h1>
@@ -28,7 +28,7 @@
     </div>
 
     <script>
-        const API_KEY = '6bc08ded';
+        const API_KEY = 'f55f96f2';
 
         // 1. ARMAZENAMENTO DE DADOS
         const catalogo = JSON.parse(localStorage.getItem('catalogoFilme')) || [];
@@ -95,6 +95,7 @@
 
             infoDiv.appendChild(tituloH3);
             infoDiv.appendChild(sinopseP);
+            infoDiv.appendChild(trailerLink);
             infoDiv.appendChild(removerBotao);
 
             filmeDiv.appendChild(imagemPoster);
@@ -109,7 +110,7 @@
             const titulo = tituloInput.value.trim();
             const sinopseManual = sinopseInput.value.trim();
 
-            if (!titulo) return;
+            if (!titulo) return;    
 
             const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titulo)}&lang=pt`;
 
