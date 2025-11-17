@@ -20,12 +20,12 @@ function criarCardFilme(filme) {
 
     // Conteúdo HTML card, usando as novas classes CSS
     card.innerHTML = `
-        <img src="${filme.poster !== 'N/A' ? filme.poster : 'placeholder.jpg'}"
-            alt="${filme.title}"
+        <img src="${filme.Poster !== 'N/A' ? filme.poster : 'placeholder.jpg'}"
+            alt="${filme.Title}"
             class="poster-filme">
         <span class="avaliacao">${rating}</span>
         <div class="card-detalhes">
-            <h3 class="titulo-filme">${filme.title} (${filme.year})</h3>
+            <h3 class="titulo-filme">${filme.title} (${filme.Year})</h3>
             <buttton class="botao-adicionar" data-title="${filme.title}">
                 + Minha Lista
             </button>
