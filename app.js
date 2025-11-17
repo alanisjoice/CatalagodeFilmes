@@ -20,7 +20,7 @@ function criarCardFilme(filme) {
 
     // Conteúdo HTML card, usando as novas classes CSS
     card.innerHTML = `
-        <img src="${filme.Poster !== 'N/A' ? filme.poster : 'placeholder.jpg'}"
+        <img src="${filme.Poster !== 'N/A' ? filme.Poster : 'placeholder.jpg'}"
             alt="${filme.Title}"
             class="poster-filme">
         <span class="avaliacao">${rating}</span>
