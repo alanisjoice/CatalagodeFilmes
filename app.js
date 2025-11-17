@@ -25,8 +25,8 @@ function criarCardFilme(filme) {
             class="poster-filme">
         <span class="avaliacao">${rating}</span>
         <div class="card-detalhes">
-            <h3 class="titulo-filme">${filme.title} (${filme.Year})</h3>
-            <buttton class="botao-adicionar" data-title="${filme.title}">
+            <h3 class="titulo-filme">${filme.Title} (${filme.Year})</h3>
+            <buttton class="botao-adicionar" data-title="${filme.Title}">
                 + Minha Lista
             </button>
         </div>
